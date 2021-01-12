@@ -21,6 +21,7 @@ public class Data {
 	private SimpleDateFormat date_time_f = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	private String complete_stat[] = {"미완료","완료","샘플"};
 	private String type_stat[] = {"수업","과제","일정","샘플"};
+	private int keys[];
 
 	public Data() {
 		File file = new File("todolist");
@@ -60,10 +61,12 @@ public class Data {
 		todolist.add(new Todo(todo));
 		Collections.sort(todolist);
 	}
-	public void del(int i) {
+	public void del(int index) {
+		int i = keys[index];
 		todolist.remove(i);
 	}
-	public void change(int i, String content,Calendar start_time,Calendar end_time,String done,String type) {
+	public void change(int index, String content,Calendar start_time,Calendar end_time,String done,String type) {
+		int i = keys[index];
 		todolist.remove(i);
 		ArrayList<String> todo = new ArrayList<String>(); 
 		todo.add(content);
@@ -74,14 +77,16 @@ public class Data {
 		todolist.add(new Todo(todo));
 		Collections.sort(todolist);
 	}
-	public String[] get(int i) {
+	public String[] get(int index) {
+		int i = keys[index];
 		Todo todo = todolist.get(i);
 	    String result[] = todo.toList().toArray(new String[0]);
 	    result[3] = complete_stat[todo.get_done()];
     	result[4] = type_stat[todo.get_type()];
 		return result;
 	}
-	public void complete(int i) {
+	public void complete(int index) {
+		int i = keys[index];
 	    Todo todo = todolist.get(i);
 	    todo.set_done(1);
 	    todolist.remove(i);
@@ -89,6 +94,7 @@ public class Data {
 	}
 	public String[][] read(Calendar target_day) throws ParseException {
 		int size = todolist.size();
+        keys = new int[size];
 		target_day.set(Calendar.HOUR_OF_DAY, 00);
 		target_day.set(Calendar.MINUTE, 00);
 		target_day.set(Calendar.SECOND, 00);
@@ -107,6 +113,7 @@ public class Data {
 		    	target_todo[count]=todo.toList().toArray(new String[0]);
 		    	target_todo[count][3] = complete_stat[todo.get_done()];
 		    	target_todo[count][4] = type_stat[todo.get_type()];
+		    	keys[count] = i;
 		    	count++;
 		    }
 		}

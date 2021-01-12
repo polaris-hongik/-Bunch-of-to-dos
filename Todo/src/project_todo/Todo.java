@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Todo implements Comparable<Todo>{
-	//내용: 내용,시작시간,끝시간,종료 여부,타입
+	//내용: 내용,시작시간,끝시간,종료 여부,타입,키
 	//종료여부: 0-미완료,1-완료,2-샘플,타입: 0-수업, 1-과제, 2-일정,3-샘플
 	private String contents;
     private Calendar start_datetime, end_datetime;
