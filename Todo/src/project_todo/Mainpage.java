@@ -29,7 +29,6 @@ import javax.swing.table.DefaultTableModel;
  
 @SuppressWarnings("serial")
 public class Mainpage extends JFrame implements ActionListener{
-    
 	private JPanel area1, area2, area3, area4;
 	private JPanel buttons;
 	private JTable table;
